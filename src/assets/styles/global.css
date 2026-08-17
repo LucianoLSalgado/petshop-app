@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Pacifico&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --color-primary-50: #e6f1ff;
+  --color-primary-100: #b3d7ff;
+  --color-primary-500: #0071ea;
+  --color-primary-600: #005bb5;
+  --color-primary-700: #004080;
+
+  --color-secondary-100: #d6eaff;
+  --color-secondary-500: #8bb8e8;
+
+  --color-accent-bem_estar: #ff4949;
+  --color-accent-comportamento: #368dff;
+
+  --font-body: 'Montserrat', sans-serif;
+  --font-logo: 'Pacifico', cursive;
+}
+
+@layer base {
+  body {
+    @apply bg-secondary-100 text-gray-800 font-body;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .card {
+    @apply bg-white rounded-lg shadow-md p-6;
+  }
+}
