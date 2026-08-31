@@ -1,13 +1,28 @@
 import { Link } from 'react-router';
 import { Card } from '@/components/ui';
-import { usePosts } from '@/hooks';
+import { usePosts, useCategories } from '@/hooks';
 
 export function Home() {
   const { data: posts, isPending, isError, error } = usePosts();
+  const { data: categories } = useCategories();
 
   return (
     <div className="container-custom py-8">
       <h1 className="text-4xl font-logo text-primary-500 mb-8">Pet Notícias</h1>
+
+      {categories?.length > 0 && (
+        <nav className="flex flex-wrap gap-3 mb-8">
+          {categories.map((category) => (
+            <Link
+              key={category.id}
+              to={`/categorias/${category.id}`}
+              className="px-4 py-2 bg-secondary-100 rounded-full text-sm hover:bg-secondary-500 hover:text-white transition-colors"
+            >
+              {category.name}
+            </Link>
+          ))}
+        </nav>
+      )}
 
       {isPending && <p className="text-gray-600">Carregando posts...</p>}
 
