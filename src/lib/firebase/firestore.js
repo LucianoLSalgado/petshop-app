@@ -5,6 +5,8 @@ import {
   getDoc,
   query,
   where,
+  setDoc,
+  deleteDoc,
 } from 'firebase/firestore';
 import { db } from './config';
 
@@ -57,4 +59,26 @@ export async function getFilteredPosts(filters = {}) {
     id: docSnapshot.id,
     ...docSnapshot.data(),
   }));
+}
+
+/**
+ * Cria (ou substitui) um documento com um id específico.
+ * @param {string} collectionName - Nome da coleção
+ * @param {string} id - Id do documento
+ * @param {Object} data - Dados a salvar
+ */
+export async function createDocumentWithId(collectionName, id, data) {
+  const docRef = doc(db, collectionName, id);
+  await setDoc(docRef, data);
+  return { id, ...data };
+}
+
+/**
+ * Exclui um documento pelo id.
+ * @param {string} collectionName - Nome da coleção
+ * @param {string} id - Id do documento
+ */
+export async function deleteDocumentById(collectionName, id) {
+  const docRef = doc(db, collectionName, id);
+  await deleteDoc(docRef);
 }

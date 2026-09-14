@@ -1,8 +1,10 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   getCollectionData,
   getDocumentById,
   getFilteredPosts,
+  createDocumentWithId,
+  deleteDocumentById,
 } from '@/lib/firebase/firestore';
 
 export function usePosts() {
@@ -40,5 +42,28 @@ export function useCategory(id) {
     queryKey: ['categories', id],
     queryFn: () => getDocumentById('categories', id),
     enabled: Boolean(id),
+  });
+}
+
+export function useCreateCategory() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ id, ...data }) =>
+      createDocumentWithId('categories', id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['categories'] });
+    },
+  });
+}
+
+export function useDeleteCategory() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (id) => deleteDocumentById('categories', id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['categories'] });
+    },
   });
 }
