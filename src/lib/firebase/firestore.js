@@ -6,6 +6,7 @@ import {
   query,
   where,
   setDoc,
+  updateDoc,
   deleteDoc,
 } from 'firebase/firestore';
 import { db } from './config';
@@ -81,4 +82,17 @@ export async function createDocumentWithId(collectionName, id, data) {
 export async function deleteDocumentById(collectionName, id) {
   const docRef = doc(db, collectionName, id);
   await deleteDoc(docRef);
+}
+
+/**
+ * Atualiza campos específicos de um documento existente, sem apagar
+ * os campos não informados.
+ * @param {string} collectionName - Nome da coleção
+ * @param {string} id - Id do documento
+ * @param {Object} data - Campos a atualizar
+ */
+export async function updateDocumentById(collectionName, id, data) {
+  const docRef = doc(db, collectionName, id);
+  await updateDoc(docRef, data);
+  return { id, ...data };
 }

@@ -26,6 +26,10 @@ export function AppRoutes() {
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<AdminCategories />} />
         <Route path="categorias/nova" element={<CategoryForm />} />
+        <Route
+          path="categorias/:categoryId/editar"
+          element={<CategoryForm />}
+        />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>

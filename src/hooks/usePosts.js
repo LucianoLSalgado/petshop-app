@@ -4,6 +4,7 @@ import {
   getDocumentById,
   getFilteredPosts,
   createDocumentWithId,
+  updateDocumentById,
   deleteDocumentById,
 } from '@/lib/firebase/firestore';
 
@@ -62,6 +63,17 @@ export function useDeleteCategory() {
 
   return useMutation({
     mutationFn: (id) => deleteDocumentById('categories', id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['categories'] });
+    },
+  });
+}
+
+export function useUpdateCategory() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ id, ...data }) => updateDocumentById('categories', id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['categories'] });
     },

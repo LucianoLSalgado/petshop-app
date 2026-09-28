@@ -40,13 +40,21 @@ export function AdminCategories() {
                 {category.subcategories?.join(', ')}
               </p>
             </div>
-            <Button
-              variant="danger"
-              size="sm"
-              onClick={() => handleDelete(category)}
-            >
-              Excluir
-            </Button>
+
+            <div className="flex gap-2">
+              <Link to={`/admin/categorias/${category.id}/editar`}>
+                <Button variant="secondary" size="sm">
+                  Editar
+                </Button>
+              </Link>
+              <Button
+                variant="danger"
+                size="sm"
+                onClick={() => handleDelete(category)}
+              >
+                Excluir
+              </Button>
+            </div>
           </Card>
         ))}
       </div>
