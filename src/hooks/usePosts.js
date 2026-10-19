@@ -3,8 +3,6 @@ import {
   getCollectionData,
   getDocumentById,
   getFilteredPosts,
-  createDocumentWithId,
-  updateDocumentById,
   deleteDocumentById,
 } from '@/lib/firebase/firestore';
 
@@ -31,51 +29,13 @@ export function usePostsByCategory(category, subcategory) {
   });
 }
 
-export function useCategories() {
-  return useQuery({
-    queryKey: ['categories'],
-    queryFn: () => getCollectionData('categories'),
-  });
-}
-
-export function useCategory(id) {
-  return useQuery({
-    queryKey: ['categories', id],
-    queryFn: () => getDocumentById('categories', id),
-    enabled: Boolean(id),
-  });
-}
-
-export function useCreateCategory() {
+export function useDeletePost() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ id, ...data }) =>
-      createDocumentWithId('categories', id, data),
+    mutationFn: (id) => deleteDocumentById('posts', id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['categories'] });
-    },
-  });
-}
-
-export function useDeleteCategory() {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: (id) => deleteDocumentById('categories', id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['categories'] });
-    },
-  });
-}
-
-export function useUpdateCategory() {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: ({ id, ...data }) => updateDocumentById('categories', id, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['categories'] });
+      queryClient.invalidateQueries({ queryKey: ['posts'] });
     },
   });
 }

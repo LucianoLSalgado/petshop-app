@@ -7,6 +7,7 @@ import {
   Category,
   AdminCategories,
   CategoryForm,
+  AdminPosts,
   NotFound,
 } from '@/pages';
 
@@ -23,6 +24,7 @@ export function AppRoutes() {
           element={<Category />}
         />
       </Route>
+
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<AdminCategories />} />
         <Route path="categorias/nova" element={<CategoryForm />} />
@@ -30,7 +32,9 @@ export function AppRoutes() {
           path="categorias/:categoryId/editar"
           element={<CategoryForm />}
         />
+        <Route path="posts" element={<AdminPosts />} />
       </Route>
+
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

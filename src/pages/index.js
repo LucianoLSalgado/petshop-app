@@ -5,3 +5,4 @@ export { Post } from './Post';
 export { Category } from './Category';
 export { AdminCategories } from './AdminCategories';
 export { CategoryForm } from './CategoryForm';
+export { AdminPosts } from './AdminPosts';
