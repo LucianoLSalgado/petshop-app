@@ -8,6 +8,7 @@ import {
   AdminCategories,
   CategoryForm,
   AdminPosts,
+  PostForm,
   NotFound,
 } from '@/pages';
 
@@ -33,6 +34,8 @@ export function AppRoutes() {
           element={<CategoryForm />}
         />
         <Route path="posts" element={<AdminPosts />} />
+        <Route path="posts/novo" element={<PostForm />} />
+        <Route path="posts/:postId/editar" element={<PostForm />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

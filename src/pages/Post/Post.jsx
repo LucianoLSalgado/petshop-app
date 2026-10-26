@@ -32,7 +32,7 @@ export function Post() {
           {post.category}
         </span>
         <h1 className="text-3xl font-bold mt-2 mb-4">{post.title}</h1>
-        <p className="text-gray-700">{post.body}</p>
+        <p className="text-gray-700 whitespace-pre-line">{post.body}</p>
       </Card>
     </div>
   );

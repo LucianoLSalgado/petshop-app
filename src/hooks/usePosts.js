@@ -3,6 +3,8 @@ import {
   getCollectionData,
   getDocumentById,
   getFilteredPosts,
+  createDocument,
+  updateDocumentById,
   deleteDocumentById,
 } from '@/lib/firebase/firestore';
 
@@ -34,6 +36,28 @@ export function useDeletePost() {
 
   return useMutation({
     mutationFn: (id) => deleteDocumentById('posts', id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['posts'] });
+    },
+  });
+}
+
+export function useCreatePost() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (data) => createDocument('posts', data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['posts'] });
+    },
+  });
+}
+
+export function useUpdatePost() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ id, ...data }) => updateDocumentById('posts', id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['posts'] });
     },

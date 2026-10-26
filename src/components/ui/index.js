@@ -2,3 +2,5 @@ export * from './Button';
 export * from './Card';
 export * from './Counter';
 export * from './Input';
+export * from './Textarea';
+export * from './Select';

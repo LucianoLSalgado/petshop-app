@@ -5,6 +5,7 @@ import {
   getDoc,
   query,
   where,
+  addDoc,
   setDoc,
   updateDoc,
   deleteDoc,
@@ -95,4 +96,16 @@ export async function updateDocumentById(collectionName, id, data) {
   const docRef = doc(db, collectionName, id);
   await updateDoc(docRef, data);
   return { id, ...data };
+}
+
+/**
+ * Cria um documento com ID gerado automaticamente pelo Firestore.
+ * @param {string} collectionName - Nome da coleção
+ * @param {Object} data - Dados do documento
+ * @returns {Promise<Object>} O documento criado, já com o id gerado
+ */
+export async function createDocument(collectionName, data) {
+  const collectionRef = collection(db, collectionName);
+  const docRef = await addDoc(collectionRef, data);
+  return { id: docRef.id, ...data };
 }
