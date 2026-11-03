@@ -1,5 +1,7 @@
 import { Outlet, Link, NavLink } from 'react-router';
 import { clsx } from 'clsx';
+import { Button } from '@/components/ui';
+import { useAuth, useLogout } from '@/hooks';
 
 const navItems = [
   { label: 'Categorias', to: '/admin', end: true },
@@ -7,6 +9,9 @@ const navItems = [
 ];
 
 export function AdminLayout() {
+  const { user } = useAuth();
+  const logout = useLogout();
+
   return (
     <div className="min-h-screen flex flex-col">
       <header className="bg-gray-800 text-white">
@@ -37,9 +42,21 @@ export function AdminLayout() {
             </nav>
           </div>
 
-          <Link to="/" className="text-sm text-gray-300 hover:text-white">
-            Voltar ao site
-          </Link>
+          <div className="flex items-center gap-4">
+            <span className="hidden sm:inline text-sm text-gray-300">
+              {user?.email}
+            </span>
+            <Link to="/" className="text-sm text-gray-300 hover:text-white">
+              Voltar ao site
+            </Link>
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => logout.mutate()}
+            >
+              Sair
+            </Button>
+          </div>
         </div>
       </header>
 
