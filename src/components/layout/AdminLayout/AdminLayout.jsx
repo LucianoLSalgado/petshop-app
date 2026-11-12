@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Outlet, Link, NavLink } from 'react-router';
 import { clsx } from 'clsx';
 import { Button } from '@/components/ui';
@@ -62,7 +63,9 @@ export function AdminLayout() {
 
       <main className="flex-1 bg-gray-50 py-8">
         <div className="container-custom">
-          <Outlet />
+          <Suspense fallback={<p className="text-gray-600">Carregando...</p>}>
+            <Outlet />
+          </Suspense>
         </div>
       </main>
     </div>

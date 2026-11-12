@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, useWatch } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useNavigate, useParams } from 'react-router';
@@ -36,7 +36,6 @@ export function PostForm() {
     register,
     handleSubmit,
     control,
-    watch,
     setValue,
     reset,
     formState: { errors, isSubmitting },
@@ -63,7 +62,7 @@ export function PostForm() {
     }
   }, [post, reset]);
 
-  const selectedCategory = watch('category');
+  const selectedCategory = useWatch('category');
 
   const categoryOptions = (categories ?? []).map((item) => ({
     value: item.id,

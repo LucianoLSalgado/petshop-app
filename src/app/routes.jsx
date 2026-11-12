@@ -1,3 +1,4 @@
+import { lazy } from 'react';
 import { Routes, Route } from 'react-router';
 import { MainLayout, AdminLayout } from '@/components/layout';
 import { ProtectedRoute } from '@/components/auth';
@@ -8,11 +9,16 @@ import {
   Category,
   AdminCategories,
   CategoryForm,
-  AdminPosts,
   PostForm,
   Login,
   NotFound,
 } from '@/pages';
+
+const AdminPosts = lazy(() =>
+  import('@/pages/AdminPosts').then((module) => ({
+    default: module.AdminPosts,
+  }))
+);
 
 export function AppRoutes() {
   return (
