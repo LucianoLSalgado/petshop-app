@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router';
 import { clsx } from 'clsx';
 import { Card } from '@/components/ui';
 import { useCategory, usePostsByCategory } from '@/hooks';
+import { PostCover } from '@/components/posts/';
 
 export function Category() {
   const { categoryId, subcategoryId } = useParams();
@@ -68,6 +69,7 @@ export function Category() {
               variant="elevated"
               className="h-full hover:shadow-xl transition-shadow"
             >
+              <PostCover post={post} className="mb-4" />
               <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
               <p className="text-gray-600">{post.excerpt}</p>
             </Card>

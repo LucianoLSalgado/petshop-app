@@ -1,10 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useForm, Controller, useWatch } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useNavigate, useParams } from 'react-router';
 import { Button, Card, Input, Select, Textarea } from '@/components/ui';
 import { useCategories, usePost, useCreatePost, useUpdatePost } from '@/hooks';
+
+const MAX_IMAGE_SIZE = 3 * 1024 * 1024;
+const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 
 const schema = yup.object({
   title: yup
@@ -21,6 +24,19 @@ const schema = yup.object({
     .min(20, 'O texto precisa ter pelo menos 20 caracteres'),
   category: yup.string().required('Selecione uma categoria'),
   subcategory: yup.string().required('Selecione uma subcategoria'),
+  image: yup
+    .mixed()
+    .test(
+      'fileType',
+      'Use uma imagem JPG, PNG ou WebP',
+      (files) => !files?.[0] || ACCEPTED_IMAGE_TYPES.includes(files[0].type)
+    )
+    .test(
+      'fileSize',
+      'A imagem deve ter no máximo 3 MB',
+      (files) => !files?.[0] || files[0].size <= MAX_IMAGE_SIZE
+    ),
+  removeImage: yup.boolean(),
 });
 
 export function PostForm() {
@@ -47,6 +63,7 @@ export function PostForm() {
       body: '',
       category: '',
       subcategory: '',
+      removeImage: false,
     },
   });
 
@@ -62,7 +79,32 @@ export function PostForm() {
     }
   }, [post, reset]);
 
-  const selectedCategory = useWatch('category');
+  const selectedCategory = useWatch({
+    control,
+    name: 'category',
+  });
+
+  const watchedImage = useWatch({
+    control,
+    name: 'image',
+  });
+
+  const newImageFile = watchedImage?.[0];
+
+  const previewUrl = useMemo(
+    () => (newImageFile ? URL.createObjectURL(newImageFile) : null),
+    [newImageFile]
+  );
+
+  useEffect(() => {
+    return () => {
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl);
+      }
+    };
+  }, [previewUrl]);
+
+  const currentImageUrl = post?.imageUrl;
 
   const categoryOptions = (categories ?? []).map((item) => ({
     value: item.id,
@@ -78,10 +120,19 @@ export function PostForm() {
   }));
 
   const onSubmit = async (formData) => {
+    const { image, removeImage, ...fields } = formData;
+    const imageFile = image?.[0];
+
     if (isEditing) {
-      await updatePost.mutateAsync({ id: postId, ...formData });
+      await updatePost.mutateAsync({
+        id: postId,
+        ...fields,
+        imageFile,
+        removeImage,
+        oldImagePath: post?.imagePath,
+      });
     } else {
-      await createPost.mutateAsync(formData);
+      await createPost.mutateAsync({ ...fields, imageFile });
     }
 
     navigate('/admin/posts');
@@ -109,6 +160,36 @@ export function PostForm() {
           error={errors.body?.message}
           {...register('body')}
         />
+
+        <Input
+          label="Imagem de capa (opcional)"
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+          error={errors.image?.message}
+          {...register('image')}
+        />
+
+        {previewUrl && (
+          <img
+            src={previewUrl}
+            alt="Pré-visualização da nova imagem"
+            className="mb-4 w-full aspect-video object-cover rounded-lg"
+          />
+        )}
+
+        {isEditing && currentImageUrl && !previewUrl && (
+          <div className="mb-4">
+            <img
+              src={currentImageUrl}
+              alt="Imagem atual do post"
+              className="mb-2 w-full aspect-video object-cover rounded-lg"
+            />
+            <label className="flex items-center gap-2 text-sm text-gray-700">
+              <input type="checkbox" {...register('removeImage')} />
+              Remover a imagem atual
+            </label>
+          </div>
+        )}
 
         <Controller
           name="category"

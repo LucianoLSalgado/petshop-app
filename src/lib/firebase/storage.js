@@ -1,4 +1,9 @@
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+} from 'firebase/storage';
 import { storage } from './config';
 
 /**
@@ -12,4 +17,19 @@ export async function uploadFile(path, file) {
   await uploadBytes(storageRef, file);
 
   return getDownloadURL(storageRef);
+}
+
+/**
+ * Exclui um arquivo do Storage. Se o arquivo já não existir,
+ * não faz nada (e não gera erro).
+ * @param {string} path - Caminho do arquivo no bucket
+ */
+export async function deleteFile(path) {
+  try {
+    await deleteObject(ref(storage, path));
+  } catch (error) {
+    if (error.code !== 'storage/object-not-found') {
+      throw error;
+    }
+  }
 }

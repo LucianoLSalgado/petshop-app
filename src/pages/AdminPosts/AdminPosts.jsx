@@ -16,7 +16,7 @@ export function AdminPosts() {
     );
 
     if (confirmed) {
-      deletePost.mutate(post.id);
+      deletePost.mutate({ id: post.id, imagePath: post.imagePath });
     }
   };
 

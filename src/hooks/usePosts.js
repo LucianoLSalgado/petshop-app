@@ -7,6 +7,8 @@ import {
   updateDocumentById,
   deleteDocumentById,
 } from '@/lib/firebase/firestore';
+import { uploadFile, deleteFile } from '@/lib/firebase/storage';
+import { buildImagePath } from '@/lib/utils';
 
 export function usePosts() {
   return useQuery({
@@ -35,7 +37,13 @@ export function useDeletePost() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (id) => deleteDocumentById('posts', id),
+    mutationFn: async ({ id, imagePath }) => {
+      await deleteDocumentById('posts', id);
+
+      if (imagePath) {
+        await deleteFile(imagePath);
+      }
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['posts'] });
     },
@@ -46,7 +54,17 @@ export function useCreatePost() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data) => createDocument('posts', data),
+    mutationFn: async ({ imageFile, ...data }) => {
+      let image = {};
+
+      if (imageFile) {
+        const imagePath = buildImagePath('posts', imageFile);
+        const imageUrl = await uploadFile(imagePath, imageFile);
+        image = { imageUrl, imagePath };
+      }
+
+      return createDocument('posts', { ...data, ...image });
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['posts'] });
     },
@@ -57,7 +75,34 @@ export function useUpdatePost() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ id, ...data }) => updateDocumentById('posts', id, data),
+    mutationFn: async ({
+      id,
+      imageFile,
+      removeImage,
+      oldImagePath,
+      ...data
+    }) => {
+      let image = {};
+
+      if (imageFile) {
+        const imagePath = buildImagePath('posts', imageFile);
+        const imageUrl = await uploadFile(imagePath, imageFile);
+        image = { imageUrl, imagePath };
+      } else if (removeImage) {
+        image = { imageUrl: null, imagePath: null };
+      }
+
+      const result = await updateDocumentById('posts', id, {
+        ...data,
+        ...image,
+      });
+
+      if (oldImagePath && (imageFile || removeImage)) {
+        await deleteFile(oldImagePath);
+      }
+
+      return result;
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['posts'] });
     },

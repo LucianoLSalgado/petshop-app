@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router';
 import { Card } from '@/components/ui';
 import { usePost } from '@/hooks';
+import { PostCover } from '@/components/posts';
 
 export function Post() {
   const { id } = useParams();
@@ -28,6 +29,7 @@ export function Post() {
       </Link>
 
       <Card variant="elevated" padding="lg" className="mt-4">
+        <PostCover post={post} priority className="mb-6" />
         <span className="text-sm text-secondary-500 uppercase">
           {post.category}
         </span>

@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import { Card } from '@/components/ui';
 import { usePosts, useCategories } from '@/hooks';
+import { PostCover } from '@/components/posts';
 
 export function Home() {
   const { data: posts, isPending, isError, error } = usePosts();
@@ -46,6 +47,7 @@ export function Home() {
               variant="elevated"
               className="h-full hover:shadow-xl transition-shadow"
             >
+              <PostCover post={post} className="mb-4" />
               <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
               <p className="text-gray-600">{post.excerpt}</p>
             </Card>
