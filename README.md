@@ -1,6 +1,6 @@
 # 🐾 Petshop App
 
-> Projeto prático oficial do livro **React: Interfaces modernas e dinâmicas**, de Luciano Lopes Salgado.
+> Projeto prático oficial do livro **React: Interfaces modernas e dinâmicas**, de Luciano Lopes Salgado e Anderson Iwanezuk Thaczuk.
 
 Aplicação web desenvolvida como projeto final de acompanhamento do livro **React: Interfaces modernas e dinâmicas**. O repositório consolida toda a evolução apresentada ao longo da obra — partindo dos fundamentos de componentização, propriedades e hooks essenciais até uma arquitetura completa e escalável em produção com roteamento protegido, estado global, cache de requisições, formulários validados, painel administrativo e deploy em nuvem com Firebase[cite: 1].
 
@@ -127,4 +127,3 @@ Certifique-se de ter o **Node.js** e o **pnpm** instalados em sua máquina[cite:
 ## 👨‍💻 Autor
 
 **Luciano Lopes Salgado** — Autor do livro *React: Interfaces modernas e dinâmicas*.
-**Anderson Iwanezuk Thaczuk** — Autor do livro *React: Interfaces modernas e dinâmicas*.
