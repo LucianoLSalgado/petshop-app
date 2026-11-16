@@ -2,7 +2,7 @@
 
 > Projeto prático oficial do livro **React: Interfaces modernas e dinâmicas**, de Luciano Lopes Salgado e Anderson Iwanezuk Thaczuk.
 
-Aplicação web desenvolvida como projeto final de acompanhamento do livro **React: Interfaces modernas e dinâmicas**. O repositório consolida toda a evolução apresentada ao longo da obra — partindo dos fundamentos de componentização, propriedades e hooks essenciais até uma arquitetura completa e escalável em produção com roteamento protegido, estado global, cache de requisições, formulários validados, painel administrativo e deploy em nuvem com Firebase[cite: 1].
+Aplicação web desenvolvida como projeto final de acompanhamento do livro **React: Interfaces modernas e dinâmicas**. O repositório consolida toda a evolução apresentada ao longo da obra — partindo dos fundamentos de componentização, propriedades e hooks essenciais até uma arquitetura completa e escalável em produção com roteamento protegido, estado global, cache de requisições, formulários validados, painel administrativo e deploy em nuvem com Firebase.
 
 ---
 
@@ -10,27 +10,27 @@ Aplicação web desenvolvida como projeto final de acompanhamento do livro **Rea
 
 Cada camada da arquitetura deste repositório reflete os conceitos construídos progressivamente nos capítulos do livro:
 
-1. **Fundamentos, JSX e Componentização:** Estruturação inicial com Vite e criação dos primeiros componentes didáticos (`Counter`, `NameForm`, `TitleUpdater` em `src/components/demo/`) e elementos reutilizáveis de interface (`Button`, `Card`, `Input`, `Select`, `Textarea` em `src/components/ui/`)[cite: 1].
-2. **Hooks e Reatividade:** Uso de `useState`, `useEffect` e criação de *custom hooks* para encapsular regras de negócio e persistência local (`useLocalStorage`, `useAuth`, `usePosts`, `useCategories` em `src/hooks/`)[cite: 1].
-3. **Estilização Moderna e Layouts:** Composição visual híbrida combinando utilitários do Tailwind CSS v4 com componentes avançados do Material UI (MUI v9 e Data Grid), organizados em layouts públicos e administrativos (`MainLayout`, `AdminLayout`)[cite: 1].
-4. **Roteamento e Controle de Acesso:** Navegação SPA com React Router v8 (`src/app/routes.jsx`), incluindo rotas dinâmicas para posts e categorias, tratamento de rotas inválidas (`NotFound`) e proteção de área restrita (`ProtectedRoute`)[cite: 1].
-5. **Gerenciamento de Estado e Assincronismo:** Separação clara entre *client state* com Zustand (`src/stores/authStore.js`) e *server state* com TanStack Query v5 (`src/lib/react-query/queryClient.js`), garantindo cache inteligente e invalidação automática de dados[cite: 1].
-6. **Formulários e Validação:** Construção de formulários performáticos e tipados com React Hook Form e esquemas de validação Yup (`PostForm` e `CategoryForm`)[cite: 1].
-7. **Integração Full Stack com Firebase e Deploy:** Persistência de dados no Cloud Firestore, autenticação com Firebase Auth, upload de capas no Cloud Storage (`src/lib/firebase/`) e publicação em produção via Firebase Hosting[cite: 1].
+1. **Fundamentos, JSX e Componentização:** Estruturação inicial com Vite e criação dos primeiros componentes didáticos (`Counter`, `NameForm`, `TitleUpdater` em `src/components/demo/`) e elementos reutilizáveis de interface (`Button`, `Card`, `Input`, `Select`, `Textarea` em `src/components/ui/`).
+2. **Hooks e Reatividade:** Uso de `useState`, `useEffect` e criação de *custom hooks* para encapsular regras de negócio e persistência local (`useLocalStorage`, `useAuth`, `usePosts`, `useCategories` em `src/hooks/`).
+3. **Estilização Moderna e Layouts:** Composição visual híbrida combinando utilitários do Tailwind CSS v4 com componentes avançados do Material UI (MUI v9 e Data Grid), organizados em layouts públicos e administrativos (`MainLayout`, `AdminLayout`).
+4. **Roteamento e Controle de Acesso:** Navegação SPA com React Router v8 (`src/app/routes.jsx`), incluindo rotas dinâmicas para posts e categorias, tratamento de rotas inválidas (`NotFound`) e proteção de área restrita (`ProtectedRoute`).
+5. **Gerenciamento de Estado e Assincronismo:** Separação clara entre *client state* com Zustand (`src/stores/authStore.js`) e *server state* com TanStack Query v5 (`src/lib/react-query/queryClient.js`), garantindo cache inteligente e invalidação automática de dados.
+6. **Formulários e Validação:** Construção de formulários performáticos e tipados com React Hook Form e esquemas de validação Yup (`PostForm` e `CategoryForm`).
+7. **Integração Full Stack com Firebase e Deploy:** Persistência de dados no Cloud Firestore, autenticação com Firebase Auth, upload de capas no Cloud Storage (`src/lib/firebase/`) e publicação em produção via Firebase Hosting.
 
 ---
 
 ## 🚀 Tecnologias Utilizadas
 
-A stack do projeto foi estruturada com ferramentas modernas do ecossistema React[cite: 1]:
+A stack do projeto foi estruturada com ferramentas modernas do ecossistema React:
 
-* **Core:** [React 19](https://react.dev/) + [Vite 8](https://vite.dev/)[cite: 1]
-* **Roteamento:** [React Router v8](https://reactrouter.com/) (rotas públicas, dinâmicas e protegidas)[cite: 1]
-* **Estilização & UI:** [Tailwind CSS v4](https://tailwindcss.com/), [Material UI (MUI v9 & X Data Grid)](https://mui.com/) e ícones [Lucide React](https://lucide.dev/)[cite: 1]
-* **Gerenciamento de Estado:** [Zustand](https://zustand-demo.pmnd.rs/) (estado global de autenticação) e [TanStack Query (React Query v5)](https://tanstack.com/query) (server state, cache e invalidação)[cite: 1]
-* **Formulários & Validação:** [React Hook Form](https://react-hook-form.com/) + [Yup](https://github.com/jquense/yup)[cite: 1]
-* **Backend as a Service (BaaS):** [Firebase](https://firebase.google.com/) (Authentication, Cloud Firestore, Cloud Storage e Firebase Hosting)[cite: 1]
-* **Utilitários & Qualidade de Código:** `date-fns`, `sonner` (notificações toast), `clsx`, `tailwind-merge`, `prop-types`, ESLint e Prettier[cite: 1]
+* **Core:** [React 19](https://react.dev/) + [Vite 8](https://vite.dev/)
+* **Roteamento:** [React Router v8](https://reactrouter.com/) (rotas públicas, dinâmicas e protegidas)
+* **Estilização & UI:** [Tailwind CSS v4](https://tailwindcss.com/), [Material UI (MUI v9 & X Data Grid)](https://mui.com/) e ícones [Lucide React](https://lucide.dev/)
+* **Gerenciamento de Estado:** [Zustand](https://zustand-demo.pmnd.rs/) (estado global de autenticação) e [TanStack Query (React Query v5)](https://tanstack.com/query) (server state, cache e invalidação)
+* **Formulários & Validação:** [React Hook Form](https://react-hook-form.com/) + [Yup](https://github.com/jquense/yup)
+* **Backend as a Service (BaaS):** [Firebase](https://firebase.google.com/) (Authentication, Cloud Firestore, Cloud Storage e Firebase Hosting)
+* **Utilitários & Qualidade de Código:** `date-fns`, `sonner` (notificações toast), `clsx`, `tailwind-merge`, `prop-types`, ESLint e Prettier
 
 ---
 
@@ -44,8 +44,8 @@ A stack do projeto foi estruturada com ferramentas modernas do ecossistema React
 * **Componentes Didáticos (`demo`):** Exemplos práticos introduzidos nos primeiros capítulos (`Counter`, `NameForm`, `TitleUpdater`, `useLocalStorage`).
 
 ### Área Administrativa (Protegida)
-* **Autenticação (`Login` & `ProtectedRoute`):** Controle de acesso via Firebase Authentication persistido com Zustand[cite: 1].
-* **Gestão de Postagens (`AdminPosts` & `PostForm`):** Listagem em tabela interativa (`@mui/x-data-grid`), criação, edição e exclusão de postagens com upload de imagens de capa no Firebase Storage[cite: 1].
+* **Autenticação (`Login` & `ProtectedRoute`):** Controle de acesso via Firebase Authentication persistido com Zustand.
+* **Gestão de Postagens (`AdminPosts` & `PostForm`):** Listagem em tabela interativa (`@mui/x-data-grid`), criação, edição e exclusão de postagens com upload de imagens de capa no Firebase Storage.
 * **Gestão de Categorias (`AdminCategories` & `CategoryForm`):** CRUD completo para organização das categorias do portal.
 
 ---
@@ -80,7 +80,7 @@ src/
 
 ## 🛠️ Pré-requisitos e Instalação
 
-Certifique-se de ter o **Node.js** e o **pnpm** instalados em sua máquina[cite: 1].
+Certifique-se de ter o **Node.js** e o **pnpm** instalados em sua máquina.
 
 1. **Clone o repositório:**
    ```bash
@@ -94,7 +94,7 @@ Certifique-se de ter o **Node.js** e o **pnpm** instalados em sua máquina[cite:
    ```
 
 3. **Configure as variáveis de ambiente:**
-   Crie um arquivo `.env` na raiz do projeto com as credenciais do seu projeto Firebase (utilizadas em `src/lib/firebase/config.js`)[cite: 1]:
+   Crie um arquivo `.env` na raiz do projeto com as credenciais do seu projeto Firebase (utilizadas em `src/lib/firebase/config.js`):
    ```env
    VITE_FIREBASE_API_KEY=sua_api_key
    VITE_FIREBASE_AUTH_DOMAIN=seu_projeto.firebaseapp.com
@@ -115,12 +115,12 @@ Certifique-se de ter o **Node.js** e o **pnpm** instalados em sua máquina[cite:
 
 | Comando | Descrição |
 | :--- | :--- |
-| `pnpm dev` | Inicia o servidor local de desenvolvimento com Vite[cite: 1] |
-| `pnpm build` | Gera a versão otimizada para produção na pasta `dist/`[cite: 1] |
-| `pnpm preview` | Visualiza localmente o build de produção[cite: 1] |
-| `pnpm lint` | Executa o ESLint verificando regras e avisos[cite: 1] |
-| `pnpm format` | Formata o código-fonte em `src/` utilizando o Prettier[cite: 1] |
-| `pnpm deploy:web` | Executa lint, build e realiza o deploy no Firebase Hosting[cite: 1] |
+| `pnpm dev` | Inicia o servidor local de desenvolvimento com Vite |
+| `pnpm build` | Gera a versão otimizada para produção na pasta `dist/` |
+| `pnpm preview` | Visualiza localmente o build de produção |
+| `pnpm lint` | Executa o ESLint verificando regras e avisos |
+| `pnpm format` | Formata o código-fonte em `src/` utilizando o Prettier |
+| `pnpm deploy:web` | Executa lint, build e realiza o deploy no Firebase Hosting |
 
 ---
 
